@@ -24,10 +24,21 @@ class LoadPlayer extends Fixture
             $faker->name => 'handgun',
         ];
 
+        $potions = [
+            $faker->name => 'small',
+            $faker->name => 'medium',
+            $faker->name => 'larger',
+            $faker->name => 'ultra',
+        ];
+
         foreach ($players as $name => $weapon) {
             $player = new Player();
             $player->setName($name);
             $player->setCurrentWeapon($this->getReference($weapon));
+
+            for($i=0;$i<rand(0,4);$i++){
+                $player->addPotions($potions[$i]);
+            }
 
             $manager->persist($player);
         }

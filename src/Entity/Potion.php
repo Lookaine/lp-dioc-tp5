@@ -5,7 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class Potion
+ * @package App\Entity
  * @ORM\Entity
+ * @ORM\Table(name="potion")
  */
 class Potion
 {
@@ -24,12 +27,41 @@ class Potion
     /**
      * @ORM\Column(type="integer")
      */
-    protected $limit;
+    protected $limited;
 
     /**
      * @ORM\Column(type="integer")
      */
     protected $healthPoint;
+
+    /**
+     * Potion constructor.
+     * @param $name
+     * @param $limited
+     * @param $healthPoint
+     */
+    public function __construct(string $name, int $limited, int $healthPoint)
+    {
+        $this->name = $name;
+        $this->limited = $limited;
+        $this->healthPoint = $healthPoint;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getLimited()
+    {
+        return $this->limited;
+    }
+
+    /**
+     * @param mixed $limited
+     */
+    public function setLimited($limited)
+    {
+        $this->limited = $limited;
+    }
 
     /**
      * @return mixed
@@ -47,21 +79,6 @@ class Potion
         $this->name = $name;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getLimit()
-    {
-        return $this->limit;
-    }
-
-    /**
-     * @param mixed $limit
-     */
-    public function setLimit($limit)
-    {
-        $this->limit = $limit;
-    }
 
     /**
      * @return mixed
@@ -78,5 +95,7 @@ class Potion
     {
         $this->healthPoint = $healthPoint;
     }
+
+
 
 }
