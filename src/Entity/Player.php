@@ -38,16 +38,16 @@ class Player
     protected $currentWeapon;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Potion")
+     * @ORM\OneToMany(targetEntity="PlayerPotion", mappedBy="player", cascade={"persist"})
      */
-    protected $potions;
+    protected $playerPotion;
 
     /**
      * Player constructor.
      */
     public function __construct()
     {
-        $this->potions = new ArrayCollection();
+        $this->playerPotion = new ArrayCollection();
     }
 
     public function getId()
@@ -85,32 +85,38 @@ class Player
         $this->currentWeapon = $currentWeapon;
     }
 
-    /**
-     * @return Collection
-     */
-    public function getPotions()
-    {
-        return $this->potions;
+    public function addPlayerPotion(PlayerPotion $pp){
+        if($this->playerPotion->contains($pp)){
+            return;
+        }
+        $this->playerPotion->add($pp);
+        $pp->setPlayer($this);
     }
 
     /**
-     * @param mixed $potions
+     * @param mixed $playerPotion
      */
-    public function setPotions($potions)
+    public function setPlayerPotions($playerPotion)
     {
-        $this->potions->clear();
+        $this->playerPotion->clear();
 
-        foreach ($potions as $potion){
-            $this->addPotions($potion);
+        foreach ($playerPotion as $playerPotions){
+            $this->addPlayerPotion($playerPotions);
         }
     }
 
-    public function addPotions(Potion $potion){
-        $this->potions->add($potion);
+    public function removePlayerPotions(PlayerPotion $playerPotion){
+        $this->playerPotion->removeElement($playerPotion);
     }
 
-    public function removePotions(Potion $potion){
-        $this->potions->removeElement($potion);
+    /**
+     * @return mixed
+     */
+    public function getPlayerPotion()
+    {
+        return $this->playerPotion;
     }
+
+
 
 }
