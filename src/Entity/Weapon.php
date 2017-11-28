@@ -14,22 +14,22 @@ class Weapon
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column()
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $damage;
+    protected $damage;
 
     /**
      * @ORM\Column(type="decimal")
      */
-    private $damageDistanceCoef;
+    protected $damageDistanceCoef;
 
     /**
      * @ORM\Column(type="integer")

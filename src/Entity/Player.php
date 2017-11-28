@@ -14,22 +14,27 @@ class Player
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    protected $id;
 
     /**
      * @ORM\Column()
      */
-    private $name;
+    protected $name;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $healthPoint = 100;
+    protected $healthPoint = 100;
 
     /**
      * @ORM\ManyToOne(targetEntity="Weapon")
      */
-    private $currentWeapon;
+    protected $currentWeapon;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Potion")
+     */
+    protected $potions;
 
     public function getId()
     {
@@ -65,4 +70,22 @@ class Player
     {
         $this->currentWeapon = $currentWeapon;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPotions()
+    {
+        return $this->potions;
+    }
+
+    /**
+     * @param mixed $potions
+     */
+    public function setPotions($potions)
+    {
+        $this->potions = $potions;
+    }
+
+
 }
